@@ -50,6 +50,47 @@ CREATE INDEX idx_last_name ON actors(last_name);
 CREATE INDEX idx_first_last_name ON actors(first_name, last_name);
 CREATE INDEX idx_gender ON actors(gender);
 ```
+## Exercise 4
+You can duplicate the config of JDBC Request and paste some of these slow queries in
+
+### Query like actors
+```sql
+SELECT * 
+FROM actors
+WHERE
+    (first_name LIKE 'John%' OR first_name LIKE 'Jo%'OR first_name LIKE 'H%')
+    AND
+    (last_name LIKE 'Doe%' OR last_name LIKE 'D%')
+    AND
+    (gender = 'M' OR gender = 'F')   
+    OR 
+    (first_name LIKE 'M%' AND last_name LIKE '%K%')
+```
+
+### Complex Regular Expressions
+```sql
+SELECT * FROM actors WHERE first_name REGEXP '^[A-M]';
+```
+
+### Using GROUP BY and COUNT
+```sql
+SELECT gender, COUNT(*) FROM actors GROUP BY gender;
+SELECT last_name, COUNT(*) FROM actors GROUP BY last_name;
+```
+
+### Joining with Itself (Self Join)
+```sql
+SELECT a1.first_name, a1.last_name, a2.first_name AS friend_first_name
+FROM actors a1
+         JOIN actors a2 ON a1.id <> a2.id
+WHERE a1.last_name = 'S%' AND a2.gender = 'F';
+```
+
+### Sorting Without an Index
+```sql
+SELECT * FROM actors ORDER BY last_name DESC;
+SELECT * FROM actors ORDER BY first_name ASC;
+```
 
 ## Exercise 5
 
