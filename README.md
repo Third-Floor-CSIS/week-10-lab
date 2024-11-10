@@ -42,3 +42,11 @@ AND
 AND
 (gender = 'M' OR gender = 'F')
 ```
+
+
+## Exercise 3
+```sql
+CREATE INDEX idx_last_name ON actors(last_name);
+CREATE INDEX idx_first_last_name ON actors(first_name, last_name);
+CREATE INDEX idx_gender ON actors(gender);
+```
