@@ -28,3 +28,17 @@ WHERE
     AND
     (gender = 'M' OR gender = 'F')   
 ```
+
+## Exercise 2
+
+```sql
+EXPLAIN
+SELECT *
+FROM actors
+WHERE
+(first_name LIKE 'John%' OR first_name LIKE 'Jo%'OR first_name LIKE 'H%')
+AND
+(last_name LIKE 'Doe%' OR last_name LIKE 'D%')
+AND
+(gender = 'M' OR gender = 'F')
+```
